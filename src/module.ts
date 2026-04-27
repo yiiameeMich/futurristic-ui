@@ -10,6 +10,12 @@ import type { FuMode } from "./runtime/types";
 
 export type { FuMode };
 export type { FuConfig } from "./runtime/types";
+export type {
+  ILinkProps,
+  ILinkPropsExternal,
+  ILinkPropsInternal,
+  RouteLocationRaw,
+} from "./runtime/types/link";
 // TODO: Make buttons and other component more a11y-friendly
 export interface ModuleOptions {
   /** Active color/style mode. Default: 'defend' */
