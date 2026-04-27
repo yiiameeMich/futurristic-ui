@@ -6,6 +6,22 @@
     </header>
 
     <main class="page__main">
+      <section class="theme-block">
+        <h2>badges</h2>
+        <article class="type-block">
+          <h3>themes</h3>
+          <div class="row">
+            <FuBadge
+              v-for="badgeTheme in badgeThemes"
+              :key="`badge-${badgeTheme}`"
+              :theme="badgeTheme"
+            >
+              {{ badgeLabels[badgeTheme] }}
+            </FuBadge>
+          </div>
+        </article>
+      </section>
+
       <section v-for="theme in themes" :key="theme" class="theme-block">
         <h2>{{ theme }}</h2>
 
@@ -45,8 +61,11 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from "vue";
 import type { IFuButtonProps } from "../../src/runtime/components/FuButton.vue";
+import type {
+  IFuBadgeProps,
+  TFuBadgeTheme,
+} from "../../src/runtime/components/FuBadge.vue";
 import type { FuMode } from "../../src/runtime/types";
 
 const props = defineProps<{
@@ -66,6 +85,20 @@ const types: NonNullable<IFuButtonProps["type"]>[] = [
 ];
 const sizes: NonNullable<IFuButtonProps["size"]>[] = ["sm", "md", "lg", "xl"];
 const states = ["default", "hover", "active", "disabled"] as const;
+const badgeThemes: NonNullable<IFuBadgeProps["theme"]>[] = [
+  "success",
+  "misc",
+  "danger",
+  "warning",
+  "neutral",
+];
+const badgeLabels: Record<TFuBadgeTheme, string> = {
+  success: "New",
+  misc: "Words",
+  danger: "Error",
+  warning: "Warning",
+  neutral: "Neutral",
+};
 
 setMode(props.mode);
 </script>
