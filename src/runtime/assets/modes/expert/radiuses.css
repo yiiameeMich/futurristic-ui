@@ -1,0 +1,24 @@
+:root[data-fu-mode='expert'] {
+  --fu-radius-button: 8px;
+  --fu-radius-button-icon-only: 8px;
+  --fu-radius-input: 8px;
+  --fu-radius-tab: 8px;
+  --fu-radius-card-sm: 12px;
+  --fu-radius-card-md: 16px;
+  --fu-radius-card-sidebar: 12px;
+  --fu-radius-text-form: 12px;
+  --fu-radius-result-panel: 12px;
+  --fu-radius-modal: 24px;
+  --fu-radius-upload-base: 12px;
+  --fu-radius-menu: 12px;
+  --fu-radius-badge: 8px;
+  --fu-radius-tag: 8px;
+  --fu-radius-nav-item: 8px;
+  --fu-radius-icon-container: 12px;
+  --fu-radius-avatar: 9999px;
+  --fu-radius-tooltip: 8px;
+  --fu-radius-featured-icon: 9999px;
+
+  --fu-radius: var(--fu-radius-button);
+  --fu-radius-lg: var(--fu-radius-card-md);
+}

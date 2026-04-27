@@ -1,0 +1,24 @@
+:root[data-fu-mode='defend'] {
+  --fu-radius-button: 9999px;
+  --fu-radius-button-icon-only: 12px;
+  --fu-radius-input: 12px;
+  --fu-radius-tab: 9999px;
+  --fu-radius-card-sm: 20px;
+  --fu-radius-card-md: 24px;
+  --fu-radius-card-sidebar: 16px;
+  --fu-radius-text-form: 20px;
+  --fu-radius-result-panel: 20px;
+  --fu-radius-modal: 24px;
+  --fu-radius-upload-base: 16px;
+  --fu-radius-menu: 16px;
+  --fu-radius-badge: 9999px;
+  --fu-radius-tag: 9999px;
+  --fu-radius-nav-item: 9999px;
+  --fu-radius-icon-container: 16px;
+  --fu-radius-avatar: 9999px;
+  --fu-radius-tooltip: 8px;
+  --fu-radius-featured-icon: 9999px;
+
+  --fu-radius: var(--fu-radius-button);
+  --fu-radius-lg: var(--fu-radius-card-md);
+}

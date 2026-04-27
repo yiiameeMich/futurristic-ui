@@ -1,0 +1,97 @@
+:root[data-fu-mode='defend'] {
+  --fu-color-base-white: #ffffff;
+  --fu-color-base-black: #000000;
+  --fu-color-base-transparent: #ffffff00;
+
+  --fu-color-gray-25: #fcfcfd;
+  --fu-color-gray-50: #f9fafb;
+  --fu-color-gray-100: #f2f4f7;
+  --fu-color-gray-200: #eaecf0;
+  --fu-color-gray-300: #d0d5dd;
+  --fu-color-gray-400: #98a2b3;
+  --fu-color-gray-500: #667085;
+  --fu-color-gray-600: #475467;
+  --fu-color-gray-700: #344054;
+  --fu-color-gray-800: #1d2939;
+  --fu-color-gray-900: #101828;
+  --fu-color-gray-950: #0c111d;
+
+  --fu-color-brand-25: #f5faff;
+  --fu-color-brand-50: #eff8ff;
+  --fu-color-brand-100: #d1e9ff;
+  --fu-color-brand-200: #b2ddff;
+  --fu-color-brand-300: #84caff;
+  --fu-color-brand-400: #53b1fd;
+  --fu-color-brand-500: #2e90fa;
+  --fu-color-brand-600: #1570ef;
+  --fu-color-brand-700: #175cd3;
+  --fu-color-brand-800: #1849a9;
+  --fu-color-brand-900: #194185;
+  --fu-color-brand-950: #102a56;
+
+  --fu-color-error-25: #fffbfa;
+  --fu-color-error-50: #fef3f2;
+  --fu-color-error-100: #fee4e2;
+  --fu-color-error-200: #fecdca;
+  --fu-color-error-300: #fda29b;
+  --fu-color-error-400: #f97066;
+  --fu-color-error-500: #f04438;
+  --fu-color-error-600: #d92d20;
+  --fu-color-error-700: #b42318;
+  --fu-color-error-800: #912018;
+  --fu-color-error-900: #7a271a;
+  --fu-color-error-950: #55160c;
+
+  --fu-color-warning-25: #fffcf5;
+  --fu-color-warning-50: #fff4eb;
+  --fu-color-warning-100: #fef0c7;
+  --fu-color-warning-200: #fedf89;
+  --fu-color-warning-300: #fec84b;
+  --fu-color-warning-400: #fdb022;
+  --fu-color-warning-500: #f79009;
+  --fu-color-warning-600: #dc6803;
+  --fu-color-warning-700: #b54708;
+  --fu-color-warning-800: #93370d;
+  --fu-color-warning-900: #7a2e0e;
+  --fu-color-warning-950: #4e1d09;
+
+  --fu-color-success-25: #ecfdf3;
+  --fu-color-success-50: #dcfae6;
+  --fu-color-success-100: #abefc6;
+  --fu-color-success-200: #75e0a7;
+  --fu-color-success-300: #47cd89;
+  --fu-color-success-400: #17b26a;
+  --fu-color-success-500: #079455;
+  --fu-color-success-600: #067647;
+  --fu-color-success-700: #085d3a;
+  --fu-color-success-800: #074d31;
+  --fu-color-success-900: #053321;
+  --fu-color-success-950: #022015;
+
+  --fu-color-accent-alpha-25: #fafaff;
+  --fu-color-accent-alpha-50: #f4f3ff;
+  --fu-color-accent-alpha-100: #ebe9fe;
+  --fu-color-accent-alpha-200: #d9d6fe;
+  --fu-color-accent-alpha-300: #bdb4fe;
+  --fu-color-accent-alpha-400: #9b8afb;
+  --fu-color-accent-alpha-500: #7a5af8;
+  --fu-color-accent-alpha-600: #6938ef;
+  --fu-color-accent-alpha-700: #5925dc;
+  --fu-color-accent-alpha-800: #4a1fb8;
+  --fu-color-accent-alpha-900: #3e1c96;
+  --fu-color-accent-alpha-950: #2a1a72;
+
+  --fu-primary: var(--fu-color-brand-700);
+  --fu-primary-light: var(--fu-color-brand-500);
+  --fu-primary-dark: var(--fu-color-brand-800);
+  --fu-secondary: var(--fu-color-gray-600);
+  --fu-accent: var(--fu-color-accent-alpha-500);
+  --fu-surface: var(--fu-color-gray-25);
+  --fu-surface-raised: var(--fu-color-base-white);
+  --fu-on-surface: var(--fu-color-gray-900);
+  --fu-on-primary: var(--fu-color-base-white);
+  --fu-border: var(--fu-color-gray-300);
+  --fu-success: var(--fu-color-success-600);
+  --fu-warning: var(--fu-color-warning-600);
+  --fu-danger: var(--fu-color-error-600);
+}

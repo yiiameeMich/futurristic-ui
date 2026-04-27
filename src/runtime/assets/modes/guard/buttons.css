@@ -1,0 +1,146 @@
+:root[data-fu-mode='guard'] {
+  /* Primary (violet CTA family) */
+  --fu-btn-primary-main-bg: #6248ff;
+  --fu-btn-primary-main-border: #6248ff;
+  --fu-btn-primary-main-text: #ffffff;
+  --fu-btn-primary-main-bg-hover: #3a26a8;
+  --fu-btn-primary-main-border-hover: #3a26a8;
+  --fu-btn-primary-main-text-hover: #ffffff;
+  --fu-btn-primary-main-bg-active: #1c1155;
+  --fu-btn-primary-main-border-active: #1c1155;
+  --fu-btn-primary-main-text-active: #ffffff;
+  --fu-btn-primary-main-bg-disabled: #eaecf0;
+  --fu-btn-primary-main-border-disabled: #eaecf0;
+  --fu-btn-primary-main-text-disabled: #98a2b3;
+
+  /* Tertiary style */
+  --fu-btn-primary-subtle-bg: #ffffff00;
+  --fu-btn-primary-subtle-border: #ffffff00;
+  --fu-btn-primary-subtle-text: #6248ff;
+  --fu-btn-primary-subtle-bg-hover: #f0eeff;
+  --fu-btn-primary-subtle-border-hover: #ffffff00;
+  --fu-btn-primary-subtle-text-hover: #6248ff;
+  --fu-btn-primary-subtle-bg-active: #e2deff;
+  --fu-btn-primary-subtle-border-active: #ffffff00;
+  --fu-btn-primary-subtle-text-active: #6248ff;
+  --fu-btn-primary-subtle-bg-disabled: #ffffff00;
+  --fu-btn-primary-subtle-border-disabled: #ffffff00;
+  --fu-btn-primary-subtle-text-disabled: #98a2b3;
+
+  /* Secondary style */
+  --fu-btn-primary-subtle-border-bg: #ffffff00;
+  --fu-btn-primary-subtle-border-border: #cec6ff;
+  --fu-btn-primary-subtle-border-text: #6248ff;
+  --fu-btn-primary-subtle-border-bg-hover: #f0eeff;
+  --fu-btn-primary-subtle-border-border-hover: #cec6ff;
+  --fu-btn-primary-subtle-border-text-hover: #6248ff;
+  --fu-btn-primary-subtle-border-bg-active: #ffffff00;
+  --fu-btn-primary-subtle-border-border-active: #cec6ff;
+  --fu-btn-primary-subtle-border-text-active: #6248ff;
+  --fu-btn-primary-subtle-border-bg-disabled: #ffffff00;
+  --fu-btn-primary-subtle-border-border-disabled: #eaecf0;
+  --fu-btn-primary-subtle-border-text-disabled: #98a2b3;
+
+  /* Quaternary style */
+  --fu-btn-primary-subtle-lift-bg: #ffffff;
+  --fu-btn-primary-subtle-lift-border: #ffffff00;
+  --fu-btn-primary-subtle-lift-text: #6248ff;
+  --fu-btn-primary-subtle-lift-shadow: 0 1px 2px rgb(16 24 40 / 0.05);
+  --fu-btn-primary-subtle-lift-bg-hover: #f0eeff;
+  --fu-btn-primary-subtle-lift-border-hover: #ffffff00;
+  --fu-btn-primary-subtle-lift-text-hover: #6248ff;
+  --fu-btn-primary-subtle-lift-shadow-hover: 0 1px 2px rgb(16 24 40 / 0.05);
+  --fu-btn-primary-subtle-lift-bg-active: #cec6ff;
+  --fu-btn-primary-subtle-lift-border-active: #ffffff00;
+  --fu-btn-primary-subtle-lift-text-active: #6248ff;
+  --fu-btn-primary-subtle-lift-shadow-active: 0 1px 2px rgb(16 24 40 / 0.05);
+  --fu-btn-primary-subtle-lift-bg-disabled: #ffffff;
+  --fu-btn-primary-subtle-lift-border-disabled: #ffffff00;
+  --fu-btn-primary-subtle-lift-text-disabled: #98a2b3;
+
+  /* Link style */
+  --fu-btn-primary-link-bg: #ffffff00;
+  --fu-btn-primary-link-border: #ffffff00;
+  --fu-btn-primary-link-text: #6248ff;
+  --fu-btn-primary-link-bg-hover: #ffffff00;
+  --fu-btn-primary-link-border-hover: #ffffff00;
+  --fu-btn-primary-link-text-hover: #6248ff;
+  --fu-btn-primary-link-bg-active: #ffffff00;
+  --fu-btn-primary-link-border-active: #ffffff00;
+  --fu-btn-primary-link-text-active: #6248ff;
+  --fu-btn-primary-link-bg-disabled: #ffffff00;
+  --fu-btn-primary-link-border-disabled: #ffffff00;
+  --fu-btn-primary-link-text-disabled: #98a2b3;
+
+  /* Secondary (error/red family) */
+  --fu-btn-secondary-main-bg: #f04438;
+  --fu-btn-secondary-main-border: #f04438;
+  --fu-btn-secondary-main-text: #ffffff;
+  --fu-btn-secondary-main-bg-hover: #b42318;
+  --fu-btn-secondary-main-border-hover: #b42318;
+  --fu-btn-secondary-main-text-hover: #ffffff;
+  --fu-btn-secondary-main-bg-active: #912018;
+  --fu-btn-secondary-main-border-active: #912018;
+  --fu-btn-secondary-main-text-active: #ffffff;
+  --fu-btn-secondary-main-bg-disabled: #eaecf0;
+  --fu-btn-secondary-main-border-disabled: #eaecf0;
+  --fu-btn-secondary-main-text-disabled: #98a2b3;
+
+  /* Tertiary style error */
+  --fu-btn-secondary-subtle-bg: #ffffff00;
+  --fu-btn-secondary-subtle-border: #ffffff00;
+  --fu-btn-secondary-subtle-text: #d92d20;
+  --fu-btn-secondary-subtle-bg-hover: #fef3f2;
+  --fu-btn-secondary-subtle-border-hover: #ffffff00;
+  --fu-btn-secondary-subtle-text-hover: #d92d20;
+  --fu-btn-secondary-subtle-bg-active: #fee4e2;
+  --fu-btn-secondary-subtle-border-active: #ffffff00;
+  --fu-btn-secondary-subtle-text-active: #d92d20;
+  --fu-btn-secondary-subtle-bg-disabled: #ffffff00;
+  --fu-btn-secondary-subtle-border-disabled: #ffffff00;
+  --fu-btn-secondary-subtle-text-disabled: #98a2b3;
+
+  /* Secondary style error */
+  --fu-btn-secondary-subtle-border-bg: #ffffff00;
+  --fu-btn-secondary-subtle-border-border: #f97066;
+  --fu-btn-secondary-subtle-border-text: #d92d20;
+  --fu-btn-secondary-subtle-border-bg-hover: #fef3f2;
+  --fu-btn-secondary-subtle-border-border-hover: #f97066;
+  --fu-btn-secondary-subtle-border-text-hover: #d92d20;
+  --fu-btn-secondary-subtle-border-bg-active: #fee4e2;
+  --fu-btn-secondary-subtle-border-border-active: #f97066;
+  --fu-btn-secondary-subtle-border-text-active: #d92d20;
+  --fu-btn-secondary-subtle-border-bg-disabled: #ffffff00;
+  --fu-btn-secondary-subtle-border-border-disabled: #eaecf0;
+  --fu-btn-secondary-subtle-border-text-disabled: #98a2b3;
+
+  /* Quaternary style error */
+  --fu-btn-secondary-subtle-lift-bg: #ffffff;
+  --fu-btn-secondary-subtle-lift-border: #ffffff00;
+  --fu-btn-secondary-subtle-lift-text: #d92d20;
+  --fu-btn-secondary-subtle-lift-shadow: 0 1px 2px rgb(16 24 40 / 0.05);
+  --fu-btn-secondary-subtle-lift-bg-hover: #fef3f2;
+  --fu-btn-secondary-subtle-lift-border-hover: #ffffff00;
+  --fu-btn-secondary-subtle-lift-text-hover: #d92d20;
+  --fu-btn-secondary-subtle-lift-shadow-hover: 0 1px 2px rgb(16 24 40 / 0.05);
+  --fu-btn-secondary-subtle-lift-bg-active: #fee4e2;
+  --fu-btn-secondary-subtle-lift-border-active: #ffffff00;
+  --fu-btn-secondary-subtle-lift-text-active: #d92d20;
+  --fu-btn-secondary-subtle-lift-shadow-active: 0 1px 2px rgb(16 24 40 / 0.05);
+  --fu-btn-secondary-subtle-lift-bg-disabled: #ffffff;
+  --fu-btn-secondary-subtle-lift-border-disabled: #ffffff00;
+  --fu-btn-secondary-subtle-lift-text-disabled: #98a2b3;
+
+  --fu-btn-secondary-link-bg: #ffffff00;
+  --fu-btn-secondary-link-border: #ffffff00;
+  --fu-btn-secondary-link-text: #d92d20;
+  --fu-btn-secondary-link-bg-hover: #ffffff00;
+  --fu-btn-secondary-link-border-hover: #ffffff00;
+  --fu-btn-secondary-link-text-hover: #d92d20;
+  --fu-btn-secondary-link-bg-active: #ffffff00;
+  --fu-btn-secondary-link-border-active: #ffffff00;
+  --fu-btn-secondary-link-text-active: #d92d20;
+  --fu-btn-secondary-link-bg-disabled: #ffffff00;
+  --fu-btn-secondary-link-border-disabled: #ffffff00;
+  --fu-btn-secondary-link-text-disabled: #98a2b3;
+}
