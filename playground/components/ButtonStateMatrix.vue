@@ -7,6 +7,34 @@
 
     <main class="page__main">
       <section class="theme-block">
+        <h2>links</h2>
+        <article class="type-block">
+          <h3>themes</h3>
+          <div class="row row--links">
+            <FuLink theme="primary" :destination="'/'">
+              Primary link
+            </FuLink>
+            <FuLink theme="secondary" :destination="'/guard'">
+              Secondary link
+            </FuLink>
+            <FuLink theme="tertiary" :destination="'/expert'">
+              Tertiary link
+            </FuLink>
+            <FuLink theme="tertiary" selected :destination="'/'">
+              Tertiary selected
+            </FuLink>
+            <FuLink
+              theme="primary"
+              external
+              destination="https://example.com"
+            >
+              External
+            </FuLink>
+          </div>
+        </article>
+      </section>
+
+      <section class="theme-block">
         <h2>badges</h2>
         <article class="type-block">
           <h3>themes</h3>
@@ -81,7 +109,6 @@ const types: NonNullable<IButtonProps["type"]>[] = [
   "subtle",
   "subtle-border",
   "subtle-lift",
-  "link",
 ];
 const sizes: NonNullable<IButtonProps["size"]>[] = ["sm", "md", "lg", "xl"];
 const states = ["default", "hover", "active", "disabled"] as const;
@@ -195,6 +222,10 @@ setMode(props.mode);
   flex-wrap: wrap;
   align-items: center;
   gap: 0.75rem;
+}
+
+.row--links {
+  align-items: stretch;
 }
 
 :deep(.preview-state--hover) {

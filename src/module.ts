@@ -15,6 +15,7 @@ export type {
   ILinkPropsExternal,
   ILinkPropsInternal,
   RouteLocationRaw,
+  TLinkTheme,
 } from "./runtime/types/link";
 // TODO: Make buttons and other component more a11y-friendly
 export interface ModuleOptions {

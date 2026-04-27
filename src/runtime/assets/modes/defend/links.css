@@ -1,0 +1,14 @@
+:root[data-fu-mode='defend'] {
+  /* UI kit “Links” secondary (neutral text), not the error “secondary” button theme */
+  --fu-link-secondary-fg: var(--fu-color-gray-700);
+  --fu-link-secondary-fg-hover: var(--fu-color-gray-900);
+  --fu-link-secondary-fg-active: var(--fu-color-gray-900);
+  --fu-link-secondary-fg-disabled: var(--fu-color-gray-400);
+
+  /* Tertiary / menu row — selected uses same radius as buttons (not design’s pill) */
+  --fu-link-tertiary-fg: var(--fu-color-gray-700);
+  --fu-link-tertiary-fg-hover: var(--fu-color-gray-900);
+  --fu-link-tertiary-bg-selected: var(--fu-color-base-white);
+  --fu-link-tertiary-fg-selected: var(--fu-color-gray-900);
+  --fu-link-tertiary-fg-disabled: var(--fu-color-gray-400);
+}

@@ -1,10 +1,13 @@
 export default defineNuxtConfig({
-  modules: ['@yiiameemich/futurristic-ui'],
+  modules: ["@yiiameemich/futurristic-ui"],
   devtools: { enabled: true },
-  compatibilityDate: 'latest',
+  compatibilityDate: "latest",
+  experimental: {
+    typedPages: true,
+  },
 
   futurristic: {
-    mode: 'defend',
-    prefix: 'Fu',
+    mode: "defend",
+    prefix: "Fu",
   },
-})
+});

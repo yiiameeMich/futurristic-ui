@@ -1,0 +1,12 @@
+:root[data-fu-mode='expert'] {
+  --fu-link-secondary-fg: var(--fu-color-gray-700);
+  --fu-link-secondary-fg-hover: var(--fu-color-gray-900);
+  --fu-link-secondary-fg-active: var(--fu-color-gray-900);
+  --fu-link-secondary-fg-disabled: var(--fu-color-gray-400);
+
+  --fu-link-tertiary-fg: var(--fu-color-gray-700);
+  --fu-link-tertiary-fg-hover: var(--fu-color-gray-900);
+  --fu-link-tertiary-bg-selected: var(--fu-color-base-white);
+  --fu-link-tertiary-fg-selected: var(--fu-color-gray-900);
+  --fu-link-tertiary-fg-disabled: var(--fu-color-gray-400);
+}

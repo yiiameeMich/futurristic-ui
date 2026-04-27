@@ -5,7 +5,7 @@ defineOptions({ inheritAttrs: false });
 
 export interface IButtonProps {
   theme?: "primary" | "secondary";
-  type?: "main" | "subtle" | "subtle-border" | "subtle-lift" | "link";
+  type?: "main" | "subtle" | "subtle-border" | "subtle-lift";
   size?: "sm" | "md" | "lg" | "xl";
   disabled?: boolean;
   iconOnly?: boolean;
@@ -213,21 +213,6 @@ const props = withDefaults(defineProps<IButtonProps>(), {
   --fu-button-text-disabled: var(--fu-btn-primary-subtle-lift-text-disabled);
 }
 
-.fu-button--theme-primary.fu-button--type-link {
-  --fu-button-bg: var(--fu-btn-primary-link-bg);
-  --fu-button-border-color: var(--fu-btn-primary-link-border);
-  --fu-button-text: var(--fu-btn-primary-link-text);
-  --fu-button-bg-hover: var(--fu-btn-primary-link-bg-hover);
-  --fu-button-border-color-hover: var(--fu-btn-primary-link-border-hover);
-  --fu-button-text-hover: var(--fu-btn-primary-link-text-hover);
-  --fu-button-bg-active: var(--fu-btn-primary-link-bg-active);
-  --fu-button-border-color-active: var(--fu-btn-primary-link-border-active);
-  --fu-button-text-active: var(--fu-btn-primary-link-text-active);
-  --fu-button-bg-disabled: var(--fu-btn-primary-link-bg-disabled);
-  --fu-button-border-color-disabled: var(--fu-btn-primary-link-border-disabled);
-  --fu-button-text-disabled: var(--fu-btn-primary-link-text-disabled);
-}
-
 /* theme: secondary */
 .fu-button--theme-secondary.fu-button--type-main {
   --fu-button-bg: var(--fu-btn-secondary-main-bg);
@@ -308,22 +293,5 @@ const props = withDefaults(defineProps<IButtonProps>(), {
     --fu-btn-secondary-subtle-lift-border-disabled
   );
   --fu-button-text-disabled: var(--fu-btn-secondary-subtle-lift-text-disabled);
-}
-
-.fu-button--theme-secondary.fu-button--type-link {
-  --fu-button-bg: var(--fu-btn-secondary-link-bg);
-  --fu-button-border-color: var(--fu-btn-secondary-link-border);
-  --fu-button-text: var(--fu-btn-secondary-link-text);
-  --fu-button-bg-hover: var(--fu-btn-secondary-link-bg-hover);
-  --fu-button-border-color-hover: var(--fu-btn-secondary-link-border-hover);
-  --fu-button-text-hover: var(--fu-btn-secondary-link-text-hover);
-  --fu-button-bg-active: var(--fu-btn-secondary-link-bg-active);
-  --fu-button-border-color-active: var(--fu-btn-secondary-link-border-active);
-  --fu-button-text-active: var(--fu-btn-secondary-link-text-active);
-  --fu-button-bg-disabled: var(--fu-btn-secondary-link-bg-disabled);
-  --fu-button-border-color-disabled: var(
-    --fu-btn-secondary-link-border-disabled
-  );
-  --fu-button-text-disabled: var(--fu-btn-secondary-link-text-disabled);
 }
 </style>
