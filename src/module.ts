@@ -4,7 +4,9 @@ import {
   addImportsDir,
   addComponentsDir,
   createResolver,
+  extendViteConfig,
 } from "@nuxt/kit";
+import svgLoader from "vite-svg-loader";
 import { defu } from "defu";
 import type { FuMode } from "./runtime/types";
 
@@ -17,6 +19,7 @@ export type {
   RouteLocationRaw,
   TLinkTheme,
 } from "./runtime/types/link";
+export type { IIconProps } from "./runtime/types/icon";
 // TODO: Make buttons and other component more a11y-friendly
 export interface ModuleOptions {
   /** Active color/style mode. Default: 'defend' */
@@ -53,6 +56,15 @@ export default defineNuxtModule<ModuleOptions>({
   },
   setup(options, nuxt) {
     const resolver = createResolver(import.meta.url);
+
+    extendViteConfig((config) => {
+      config.plugins ??= [];
+      config.plugins.push(
+        svgLoader({
+          defaultImport: "url",
+        }),
+      );
+    });
 
     // Expose initial mode to runtime via public runtimeConfig
     nuxt.options.runtimeConfig.public.futurristic = defu(

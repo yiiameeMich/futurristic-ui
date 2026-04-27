@@ -40,7 +40,8 @@
   },
   "dependencies": {
     "@nuxt/kit": "^3.0.0 || ^4.0.0",
-    "defu": "^6.1.4"
+    "defu": "^6.1.4",
+    "vite-svg-loader": "^5.1.0"
   },
   "peerDependencies": {
     "nuxt": "^3.0.0 || ^4.0.0"
