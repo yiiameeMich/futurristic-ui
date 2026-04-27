@@ -1,18 +1,18 @@
 <script setup lang="ts">
 defineOptions({ inheritAttrs: false });
 
-export type TFuBadgeTheme =
+export type TBadgeTheme =
   | "success"
   | "misc"
   | "danger"
   | "warning"
   | "neutral";
 
-export interface IFuBadgeProps {
-  theme?: TFuBadgeTheme;
+export interface IBadgeProps {
+  theme?: TBadgeTheme;
 }
 
-const props = withDefaults(defineProps<IFuBadgeProps>(), {
+const props = withDefaults(defineProps<IBadgeProps>(), {
   theme: "neutral",
 });
 </script>

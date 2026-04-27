@@ -61,11 +61,11 @@
 </template>
 
 <script setup lang="ts">
-import type { IFuButtonProps } from "../../src/runtime/components/FuButton.vue";
+import type { IButtonProps } from "../../src/runtime/components/Button.vue";
 import type {
-  IFuBadgeProps,
-  TFuBadgeTheme,
-} from "../../src/runtime/components/FuBadge.vue";
+  IBadgeProps,
+  TBadgeTheme,
+} from "../../src/runtime/components/Badge.vue";
 import type { FuMode } from "../../src/runtime/types";
 
 const props = defineProps<{
@@ -75,24 +75,24 @@ const props = defineProps<{
 
 const { setMode } = useFuturristic();
 
-const themes: NonNullable<IFuButtonProps["theme"]>[] = ["primary", "secondary"];
-const types: NonNullable<IFuButtonProps["type"]>[] = [
+const themes: NonNullable<IButtonProps["theme"]>[] = ["primary", "secondary"];
+const types: NonNullable<IButtonProps["type"]>[] = [
   "main",
   "subtle",
   "subtle-border",
   "subtle-lift",
   "link",
 ];
-const sizes: NonNullable<IFuButtonProps["size"]>[] = ["sm", "md", "lg", "xl"];
+const sizes: NonNullable<IButtonProps["size"]>[] = ["sm", "md", "lg", "xl"];
 const states = ["default", "hover", "active", "disabled"] as const;
-const badgeThemes: NonNullable<IFuBadgeProps["theme"]>[] = [
+const badgeThemes: NonNullable<IBadgeProps["theme"]>[] = [
   "success",
   "misc",
   "danger",
   "warning",
   "neutral",
 ];
-const badgeLabels: Record<TFuBadgeTheme, string> = {
+const badgeLabels: Record<TBadgeTheme, string> = {
   success: "New",
   misc: "Words",
   danger: "Error",

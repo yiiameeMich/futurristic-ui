@@ -3,7 +3,7 @@ import type { Component } from "vue";
 
 defineOptions({ inheritAttrs: false });
 
-export interface IFuButtonProps {
+export interface IButtonProps {
   theme?: "primary" | "secondary";
   type?: "main" | "subtle" | "subtle-border" | "subtle-lift" | "link";
   size?: "sm" | "md" | "lg" | "xl";
@@ -15,7 +15,7 @@ export interface IFuButtonProps {
   appendIconClass?: string;
 }
 
-const props = withDefaults(defineProps<IFuButtonProps>(), {
+const props = withDefaults(defineProps<IButtonProps>(), {
   theme: "primary",
   type: "main",
   size: "md",
