@@ -16,6 +16,9 @@ node_modules
 # Generated dirs
 dist
 
+# Icon prop types (from scripts/generate-fu-icon-types.mjs — run npm install or npm run dev:prepare)
+src/runtime/types/icon-types.generated.ts
+
 # Nuxt
 .nuxt
 .output

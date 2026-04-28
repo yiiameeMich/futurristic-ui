@@ -10,14 +10,20 @@
 </template>
 
 <style>
-*, *::before, *::after { box-sizing: border-box; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
   background-color: var(--fu-surface);
   color: var(--fu-on-surface);
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .playground-nav {

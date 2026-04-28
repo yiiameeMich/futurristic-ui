@@ -9,7 +9,7 @@ import {
 import svgLoader from "vite-svg-loader";
 import { defu } from "defu";
 import type { FuMode } from "./runtime/types";
-
+// TODO: Import svgs into the module, add type-safety
 export type { FuMode };
 export type { FuConfig } from "./runtime/types";
 export type {
@@ -19,7 +19,13 @@ export type {
   RouteLocationRaw,
   TLinkTheme,
 } from "./runtime/types/link";
-export type { IIconProps } from "./runtime/types/icon";
+export { FU_ICON_DEFAULT_TYPE } from "./runtime/types/icon";
+export type {
+  FuIconName,
+  FuIconRegistry,
+  FuIconType,
+  IIconProps,
+} from "./runtime/types/icon";
 // TODO: Make buttons and other component more a11y-friendly
 export interface ModuleOptions {
   /** Active color/style mode. Default: 'defend' */

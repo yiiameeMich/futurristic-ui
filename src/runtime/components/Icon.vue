@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { computed, defineAsyncComponent } from "vue";
-import type { IIconProps } from "../types/icon";
+import { FU_ICON_DEFAULT_TYPE, type IIconProps } from "../types/icon";
 
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<IIconProps>(), {
   iconName: undefined,
-  iconType: "general",
+  iconType: FU_ICON_DEFAULT_TYPE,
 });
 
 function safeSegment(value: string | undefined, fallback: string) {
@@ -26,7 +26,7 @@ const asyncSvg = computed(() => {
     return null;
   }
 
-  const type = safeSegment(props.iconType, "general");
+  const type = safeSegment(props.iconType, FU_ICON_DEFAULT_TYPE);
   const name = safeSegment(rawName, "");
 
   if (!name) {
