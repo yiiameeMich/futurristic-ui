@@ -1,137 +1,144 @@
 /**
  * Shared icon scan + TypeScript emission (used by the CLI and vitest).
  */
-import { existsSync, readdirSync, statSync } from 'node:fs'
-import { join } from 'node:path'
+import { existsSync, readdirSync, statSync } from "node:fs";
+import { join } from "node:path";
 
-export const FU_ICON_DEFAULT_TYPE = 'general'
+export const FU_ICON_DEFAULT_TYPE = "general";
 
 function isSafePathSegment(segment) {
-  const v = segment.trim()
+  const v = segment.trim();
   return (
-    v.length > 0
-    && !v.includes('..')
-    && !v.includes('/')
-    && !v.includes('\\')
-  )
+    v.length > 0 && !v.includes("..") && !v.includes("/") && !v.includes("\\")
+  );
 }
 
 export function scanFuIconAssets(iconsRoot) {
   if (!existsSync(iconsRoot) || !statSync(iconsRoot).isDirectory()) {
-    return {}
+    return {};
   }
 
-  const result = {}
+  const result = {};
 
   for (const typeName of readdirSync(iconsRoot)) {
     if (!isSafePathSegment(typeName)) {
-      continue
+      continue;
     }
 
-    const dir = join(iconsRoot, typeName)
+    const dir = join(iconsRoot, typeName);
     if (!statSync(dir).isDirectory()) {
-      continue
+      continue;
     }
 
-    const names = []
+    const names = [];
     for (const file of readdirSync(dir)) {
-      if (!file.endsWith('.svg')) {
-        continue
+      if (!file.endsWith(".svg")) {
+        continue;
       }
-      const base = file.slice(0, -'.svg'.length)
+      const base = file.slice(0, -".svg".length);
       if (!isSafePathSegment(base)) {
-        continue
+        continue;
       }
-      names.push(base)
+      names.push(base);
     }
 
     if (names.length) {
-      result[typeName] = [...names].sort((a, b) => a.localeCompare(b))
+      result[typeName] = [...names].sort((a, b) => a.localeCompare(b));
     }
   }
 
-  return result
+  return result;
 }
 
 function escapeString(s) {
-  return s.replace(/\\/g, '\\\\').replace(/'/g, '\\\'')
+  return s.replace(/\\/g, "\\\\").replace(/'/g, "\\'");
 }
 
 /** Single-quoted TS string literal content */
 function tsStringLiteral(value) {
-  return `'${escapeString(value)}'`
+  return `'${escapeString(value)}'`;
 }
 
 function literalUnion(names) {
   if (!names.length) {
-    return 'never'
+    return "never";
   }
-  return names.map(n => tsStringLiteral(n)).join(' | ')
+  return names.map((n) => tsStringLiteral(n)).join(" | ");
 }
 
 function tsPropertyKey(name) {
   if (/^[a-z_$][\w$]*$/i.test(name)) {
-    return name
+    return name;
   }
-  return tsStringLiteral(name)
+  return tsStringLiteral(name);
 }
 
 /**
  * Emits `icon-types.generated.ts` contents (types only; no runtime exports).
  */
-export function generateRuntimeIconTypesSource(registry, defaultType = FU_ICON_DEFAULT_TYPE) {
-  const keys = Object.keys(registry).sort((a, b) => a.localeCompare(b))
+export function generateRuntimeIconTypesSource(
+  registry,
+  defaultType = FU_ICON_DEFAULT_TYPE,
+) {
+  const keys = Object.keys(registry).sort((a, b) => a.localeCompare(b));
 
-  const registryBody = keys.length === 0
-    ? ''
-    : keys.map((typeName) => {
-        const names = registry[typeName]
-        const lit = literalUnion(names)
-        return `  ${tsPropertyKey(typeName)}: ${lit}`
-      }).join('\n')
+  const registryBody =
+    keys.length === 0
+      ? ""
+      : keys
+          .map((typeName) => {
+            const names = registry[typeName];
+            const lit = literalUnion(names);
+            return `  ${tsPropertyKey(typeName)}: ${lit}`;
+          })
+          .join("\n");
 
-  const fuIconRegistry = keys.length === 0
-    ? `export interface FuIconRegistry {}
+  const fuIconRegistry =
+    keys.length === 0
+      ? `export interface FuIconRegistry {}
 `
-    : `export interface FuIconRegistry {
+      : `export interface FuIconRegistry {
 ${registryBody}
 }
-`
+`;
 
-  let iIconProps
+  let iIconProps;
   if (keys.length === 0) {
     iIconProps = `export type IIconProps = {
   iconType?: string
   iconName?: string
 }
-`
-  }
-  else if (keys.length === 1) {
-    const k = keys[0]
-    const lit = literalUnion(registry[k])
+`;
+  } else if (keys.length === 1) {
+    const k = keys[0];
+    const lit = literalUnion(registry[k]);
     iIconProps = `export type IIconProps = {
   iconType?: ${tsStringLiteral(k)}
   iconName?: ${lit}
 }
-`
-  }
-  else {
-    const parts = []
+`;
+  } else {
+    const parts = [];
     if (registry[defaultType]) {
-      parts.push(`  | { iconType?: ${tsStringLiteral(defaultType)}; iconName?: ${literalUnion(registry[defaultType])} }`)
-    }
-    else {
-      parts.push(`  | { iconType?: ${tsStringLiteral(defaultType)}; iconName?: string }`)
+      parts.push(
+        `  | { iconType?: ${tsStringLiteral(defaultType)}; iconName?: ${literalUnion(registry[defaultType])} }`,
+      );
+    } else {
+      parts.push(
+        `  | { iconType?: ${tsStringLiteral(defaultType)}; iconName?: string }`,
+      );
     }
     for (const k of keys) {
       if (k === defaultType) {
-        continue
+        continue;
       }
-      parts.push(`  | { iconType: ${tsStringLiteral(k)}; iconName?: ${literalUnion(registry[k])} }`)
+      parts.push(
+        `  | { iconType: ${tsStringLiteral(k)}; iconName?: ${literalUnion(registry[k])} }`,
+      );
     }
     iIconProps = `export type IIconProps =
-${parts.join('\n')}
-`
+${parts.join("\n")}
+`;
   }
 
   return `/**
@@ -153,5 +160,5 @@ export type FuIconName<T extends FuIconType> = keyof FuIconRegistry extends neve
     : string
 
 ${iIconProps}
-`
+`;
 }

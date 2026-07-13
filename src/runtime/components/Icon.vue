@@ -52,8 +52,6 @@ const asyncSvg = computed(() => {
 <style scoped>
 .fu-icon {
   display: inline-block;
-  width: 1em;
-  height: 1em;
   flex-shrink: 0;
   vertical-align: -0.125em;
   color: inherit;

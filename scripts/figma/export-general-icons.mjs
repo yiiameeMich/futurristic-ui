@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 /**
- * Exports the "General" icons (frame `3463:407907`) from Figma as SVGs.
+ * Exports icon sets from Figma as SVGs.
  *
  * Usage:
  *   FIGMA_TOKEN=xxxx node scripts/figma/export-general-icons.mjs
+ *   FIGMA_TOKEN=xxxx node scripts/figma/export-general-icons.mjs arrows
+ *   FIGMA_TOKEN=xxxx node scripts/figma/export-general-icons.mjs general
  *
  * Notes:
- * - Writes into `src/runtime/assets/icons/general/`
+ * - Writes into `src/runtime/assets/icons/<set>/`
  * - Preserves icon names from the right-side labels (Figma component names)
  * - Normalizes `stroke="black"` → `stroke="currentColor"` (and same for `fill="black"`)
  */
@@ -15,8 +17,27 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 const FILE_KEY = "M5Pmju2u0V1D44toH41Eoi";
-const ICON_DIR = path.resolve("src/runtime/assets/icons/general");
-const NODE_MAP_PATH = path.resolve("scripts/figma/general-icons.node-map.json");
+
+const SET_CONFIG = {
+  general: {
+    iconDir: path.resolve("src/runtime/assets/icons/general"),
+    nodeMapPath: path.resolve("scripts/figma/general-icons.node-map.json"),
+  },
+  arrows: {
+    iconDir: path.resolve("src/runtime/assets/icons/arrows"),
+    nodeMapPath: path.resolve("scripts/figma/arrows-icons.node-map.json"),
+  },
+};
+
+const selectedSet = process.argv[2] || "general";
+if (!Object.hasOwn(SET_CONFIG, selectedSet)) {
+  console.error(
+    `Unknown icon set "${selectedSet}". Valid sets: ${Object.keys(SET_CONFIG).join(", ")}`,
+  );
+  process.exit(1);
+}
+
+const { iconDir: ICON_DIR, nodeMapPath: NODE_MAP_PATH } = SET_CONFIG[selectedSet];
 
 const token = process.env.FIGMA_TOKEN;
 if (!token) {
@@ -94,5 +115,5 @@ if (missing.length) {
   for (const m of missing) console.warn(`- ${m.name} (${m.id})`);
 }
 
-console.log(`Wrote ${written} SVG icons to ${ICON_DIR}`);
+console.log(`Wrote ${written} "${selectedSet}" SVG icons to ${ICON_DIR}`);
 
