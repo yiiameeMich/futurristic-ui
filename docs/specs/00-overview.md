@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Status | Binding |
-| Last-verified | `dfcb150` |
+| Last-verified | `0069507` |
 
 ## Purpose
 
@@ -121,4 +121,4 @@ Aggregated from all docs. Each entry links to the roadmap item that resolves it;
 | D5 | `Button.vue` has no `:focus-visible` styling | 02 rules | [02 §9](02-component-standards.md) | [06 §Now](06-roadmap.md) |
 | D6 | `src/scan-fu-icon-assets.ts` is a dead duplicate of the `.mjs` scanner, documenting an unimplemented integration | 03 rules | [03 §7](03-icon-pipeline.md) | [06 §Now](06-roadmap.md) |
 | D7 | Root `README.md` is the unmodified module-starter template | 05 rules | [05 §7](05-module-config-and-dx.md) | [06 §Now](06-roadmap.md) |
-| D8 | `arrows` icon set: 93-entry node map exists (currently untracked), zero SVGs exported | 03 rules | [03 §7](03-icon-pipeline.md) | [06 §Now](06-roadmap.md) |
+| D9 | `general/close.svg` + `general/test.svg` committed but absent from the node map | 03 rules | [03 §7](03-icon-pipeline.md) | [06 §Now](06-roadmap.md) |

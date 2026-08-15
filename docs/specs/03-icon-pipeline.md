@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Status | Binding |
-| Last-verified | `dfcb150` |
+| Last-verified | `0069507` |
 
 Owns: how icons travel from Figma to a typed `<FuIcon>` render. Sets are directories; names are filenames; types are generated, never written.
 
@@ -13,8 +13,13 @@ Owns: how icons travel from Figma to a typed `<FuIcon>` render. Sets are directo
 Figma file (FILE_KEY M5Pmju2u0V1D44toH41Eoi)
    │  scripts/figma/<set>-icons.node-map.json   (node-id → icon name)
    ▼
-scripts/figma/export-general-icons.mjs <set>     (design-time, FIGMA_TOKEN)
-   │  fetches SVGs in chunks of 50, normalizes black → currentColor
+scripts/figma/export-icons.mjs <set...|all>      (design-time, FIGMA_TOKEN, REST API)
+   │  — OR, when refreshing/authoring node maps: Figma MCP connector
+   │    (get_metadata for symbol id/name, get_design_context for asset URLs)
+   │  fetches SVGs in chunks of 50, normalizes black/var(--x,black) → currentColor
+   ▼
+scripts/figma/normalize-icons.mjs <set...|all>   (idempotent post-processor)
+   │  fixed 24×24 root, strips MCP wrapper cruft, reports leftover paints
    ▼
 src/runtime/assets/icons/<set>/<name>.svg        (committed to git)
    ▼
@@ -29,14 +34,29 @@ Icon.vue: import(`../assets/icons/${type}/${name}.svg?component`)
 per-icon lazy chunk, rendered inline, colored via currentColor
 ```
 
-Current inventory: `general` — 195 SVGs; `arrows` — node map exists (93 entries), zero SVGs exported (**D8**).
+`scripts/figma/icon-sets.mjs` is the single source of truth for `FILE_KEY` and the `SETS` map (set name → Figma category frame node-id); both `export-icons.mjs` and `normalize-icons.mjs` import it.
+
+Current inventory (19 sets, 1182 mapped SVGs + 2 legacy strays in `general`):
+
+| set | count | | set | count | | set | count |
+|---|---|---|---|---|---|---|---|
+| general | 195 | | communication | 58 | | maps | 45 |
+| media | 108 | | files | 57 | | charts | 49 |
+| editor | 107 | | development | 57 | | weather | 52 |
+| arrows | 93 | | layout | 63 | | education | 31 |
+| finance | 79 | | security | 36 | | images | 29 |
+| | | | users | 41 | | alerts | 28 |
+| | | | | | | time | 28 |
+| | | | | | | shapes | 26 |
+
+Playground gallery at `playground/pages/icons.vue` renders every set (filterable, with a color swatch to verify `currentColor` theming) — dev-only, not shipped.
 
 ## 2. SVG contract
 
 Every committed icon **MUST**:
 
 - Live at `src/runtime/assets/icons/<set>/<name>.svg`; both `<set>` and `<name>` pass the safe-segment rule (non-empty, no `..`, `/`, `\`) — enforced at scan time and again at runtime.
-- Use `currentColor` for themable strokes/fills. The export script normalizes `stroke="black"`/`fill="black"` → `currentColor`; icons authored with other colors need manual attention.
+- Use `currentColor` for themable strokes/fills. `export-icons.mjs` normalizes plain `black`; `normalize-icons.mjs` additionally handles the Figma-MCP-asset shape `var(--stroke-N, black)` and `#000`/`#000000`. Icons authored with other colors need manual attention (the normalizer's leftover-paint report flags them).
 - Carry a `viewBox` (Figma exports do) — `Icon.vue` scales via `width/height: 100%`, sizing is the consumer's box.
 
 ## 3. Generation contract
@@ -56,19 +76,24 @@ Every committed icon **MUST**:
 
 ## 5. Adding icons or a new set — checklist
 
-1. For a new set: create `scripts/figma/<set>-icons.node-map.json` (node-id → name) and add the set to `SET_CONFIG` in [scripts/figma/export-general-icons.mjs](../../scripts/figma/export-general-icons.mjs). Commit the node map.
-2. Export: `FIGMA_TOKEN=… node scripts/figma/export-general-icons.mjs <set>`; check the "missing" warnings.
-3. Spot-check normalized SVGs (`currentColor`, viewBox).
-4. Regenerate types: `npm run dev:prepare` (or the generate script directly).
-5. Commit the SVGs + node map. Types stay gitignored.
+1. Add the set's name → Figma category frame node-id to `SETS` in [scripts/figma/icon-sets.mjs](../../scripts/figma/icon-sets.mjs).
+2. Author `scripts/figma/<set>-icons.node-map.json` (node-id → kebab-case name). Two ways to get the id/name pairs:
+   - **Figma MCP connector** (used to build all 19 current maps): `get_metadata` on the category frame returns every icon `<symbol id name>`; slugify names (`/^[a-z0-9][a-z0-9-]*$/`, hard-fail on collision, never auto-suffix) and write the map by hand/agent — there is no committed generator script for this path.
+   - **Figma REST API** (`FIGMA_TOKEN`): if you already have a map from another source, skip straight to export.
+3. Fetch SVGs: `FIGMA_TOKEN=… node scripts/figma/export-icons.mjs <set...|all>` (REST path; supports `--prune` to remove SVGs no longer in the map) — or, on the MCP path, `get_design_context` on the same frame for per-icon asset URLs and download them directly into `src/runtime/assets/icons/<set>/`.
+4. Normalize: `node scripts/figma/normalize-icons.mjs <set...|all>`. Idempotent; review its leftover-paint warnings before committing.
+5. Regenerate types: `npm run dev:prepare`.
+6. Commit the SVGs + node map. Types stay gitignored.
 
 ## 6. Performance characteristics
 
-Icons never load eagerly: no icon font, no sprite bundled into the entry, one HTTP-cacheable chunk per icon fetched on first render. 195 icons on disk cost consumers nothing until used. This is invariant I9; changes to icon delivery must preserve it or amend [04](04-css-delivery-and-performance.md).
+Icons never load eagerly: no icon font, no sprite bundled into the entry, one HTTP-cacheable chunk per icon fetched on first render. 1182+ icons on disk cost consumers nothing until used. This is invariant I9; changes to icon delivery must preserve it or amend [04](04-css-delivery-and-performance.md).
 
 ## 7. Known deviations
 
 | ID | Deviation | Resolution |
 |---|---|---|
 | D6 | [src/scan-fu-icon-assets.ts](../../src/scan-fu-icon-assets.ts) is a near-duplicate TS copy of the `.mjs` scanner whose doc comment describes an `addTypeTemplate` module integration that was never wired into `module.ts`. Dead code shadowing the canonical implementation. | Delete it (or implement the integration it describes — decision defaults to delete) — [06 §Now](06-roadmap.md) |
-| D8 | `arrows` set: 93-entry node map exists (currently untracked in git), 0 SVGs on disk, so the set is absent from generated types | Commit the node map + run the export — [06 §Now](06-roadmap.md) |
+| D9 | `src/runtime/assets/icons/general/close.svg` and `general/test.svg` are committed but absent from `general-icons.node-map.json` (pre-date the pipeline); they leak into the generated type union. | Prune or add to the map — separate decision, not part of this change — [06 §Now](06-roadmap.md) |
+
+D8 (arrows set unexported) is resolved: node map verified against Figma, 93 SVGs exported and normalized.

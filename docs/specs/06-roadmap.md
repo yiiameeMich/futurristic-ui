@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Status | Draft (living document) |
-| Last-verified | `dfcb150` |
+| Last-verified | `0069507` |
 
 Planned work in dependency order, not calendar order. Acceptance criteria live in the owning spec sections — items here point at them instead of restating.
 
@@ -17,7 +17,7 @@ An item is **done** when: (1) the owning spec section is written/updated, (2) th
 |---|---|---|
 | Rewrite root `README.md` per the consumer-guide outline | D7 | [05 §3](05-module-config-and-dx.md) |
 | Delete dead `src/scan-fu-icon-assets.ts` | D6 | [03 §7](03-icon-pipeline.md) |
-| Commit `arrows` node map + run the export (93 icons) + regen types | D8 | [03 §5](03-icon-pipeline.md) |
+| Prune or map the stray `general/close.svg` + `general/test.svg` | D9 | [03 §7](03-icon-pipeline.md) |
 | Add `:focus-visible` styling to `Button.vue` | D5 | [02 §1](02-component-standards.md) |
 | Migrate Badge misc theme to `--fu-badge-misc-*` mode tokens (all modes) | D1 | [01 §6](01-style-modes-and-theming.md) |
 | Backfill `accent-beta` ramp in `defend/colors.css` | D3 | [01 §5](01-style-modes-and-theming.md) |
