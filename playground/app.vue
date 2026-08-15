@@ -4,6 +4,7 @@
       <NuxtLink to="/">Defend</NuxtLink>
       <NuxtLink to="/guard">Guard</NuxtLink>
       <NuxtLink to="/expert">Expert</NuxtLink>
+      <NuxtLink to="/icons">Icons</NuxtLink>
     </nav>
     <NuxtPage />
   </div>
