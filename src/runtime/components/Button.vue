@@ -1,18 +1,17 @@
 <script setup lang="ts">
-import type { Component } from "vue";
+import { computed } from "vue";
+import { FU_ICON_DEFAULT_TYPE } from "../types/icon";
+import type { IIconSlotProps } from "../types/icon-slot";
+import { resolveIconSlot } from "../utils/icon-slot";
 
 defineOptions({ inheritAttrs: false });
 
-export interface IButtonProps {
+export interface IButtonProps extends IIconSlotProps {
   theme?: "primary" | "secondary";
   type?: "main" | "subtle" | "subtle-border" | "subtle-lift";
   size?: "sm" | "md" | "lg" | "xl";
   disabled?: boolean;
   iconOnly?: boolean;
-  prependIcon?: Component;
-  prependIconClass?: string;
-  appendIcon?: Component;
-  appendIconClass?: string;
 }
 
 const props = withDefaults(defineProps<IButtonProps>(), {
@@ -22,10 +21,22 @@ const props = withDefaults(defineProps<IButtonProps>(), {
   disabled: false,
   iconOnly: false,
   prependIcon: undefined,
+  prependIconName: undefined,
+  prependIconType: FU_ICON_DEFAULT_TYPE,
   prependIconClass: "",
+  prependIconColor: undefined,
   appendIcon: undefined,
+  appendIconName: undefined,
+  appendIconType: FU_ICON_DEFAULT_TYPE,
   appendIconClass: "",
+  appendIconColor: undefined,
 });
+
+const prependIconSlot = computed(() =>
+  resolveIconSlot(props.prependIcon, props.prependIconName, props.prependIconType),
+);
+
+const appendIconSlot = computed(() => resolveIconSlot(props.appendIcon, props.appendIconName, props.appendIconType));
 </script>
 
 <template>
@@ -43,15 +54,19 @@ const props = withDefaults(defineProps<IButtonProps>(), {
     :disabled="disabled"
   >
     <component
-      :is="prependIcon"
-      v-if="prependIcon"
-      :class="prependIconClass"
+      :is="prependIconSlot.is"
+      v-if="prependIconSlot"
+      v-bind="prependIconSlot.props"
+      :class="['fu-button__icon', prependIconClass]"
+      :style="prependIconColor ? { color: prependIconColor } : undefined"
     />
     <slot />
     <component
-      :is="appendIcon"
-      v-if="appendIcon"
-      :class="appendIconClass"
+      :is="appendIconSlot.is"
+      v-if="appendIconSlot"
+      v-bind="appendIconSlot.props"
+      :class="['fu-button__icon', appendIconClass]"
+      :style="appendIconColor ? { color: appendIconColor } : undefined"
     />
   </button>
 </template>
@@ -77,6 +92,7 @@ const props = withDefaults(defineProps<IButtonProps>(), {
 }
 
 .fu-button--sm {
+  --fu-icon-size: 20px;
   height: 36px;
   gap: 4px;
   padding: 7px 12px;
@@ -84,6 +100,7 @@ const props = withDefaults(defineProps<IButtonProps>(), {
   line-height: 22px;
 }
 .fu-button--md {
+  --fu-icon-size: 20px;
   height: 44px;
   gap: 4px;
   padding: 11px 14px;
@@ -91,6 +108,7 @@ const props = withDefaults(defineProps<IButtonProps>(), {
   line-height: 22px;
 }
 .fu-button--lg {
+  --fu-icon-size: 24px;
   height: 48px;
   gap: 6px;
   padding: 12px 16px;
@@ -98,6 +116,7 @@ const props = withDefaults(defineProps<IButtonProps>(), {
   line-height: 26px;
 }
 .fu-button--xl {
+  --fu-icon-size: 24px;
   height: 56px;
   gap: 6px;
   padding: 16px 18px;
@@ -129,6 +148,13 @@ const props = withDefaults(defineProps<IButtonProps>(), {
   color: var(--fu-button-text-disabled);
   box-shadow: none;
   cursor: not-allowed;
+}
+
+.fu-button__icon {
+  flex-shrink: 0;
+  /* Floor only — the SVG markup still decides the rendered width/height. */
+  min-width: var(--fu-icon-size);
+  min-height: var(--fu-icon-size);
 }
 
 .fu-button--icon-only {

@@ -68,6 +68,11 @@ Consistent axes across the kit — reuse these names before inventing new ones:
 | `size` | Physical size | `sm\|md\|lg\|xl` |
 | `disabled`, `selected`, `iconOnly`, `external` | Boolean flags, default `false` | |
 | `prependIcon` / `appendIcon` | `Component` (render any icon component, typically `FuIcon` or a raw SVG import) | paired with `prependIconClass` / `appendIconClass: string` |
+| `prependIconName` / `appendIconName` | `FuAnyIconName` — project icon addressed by name, rendered through `FuIcon` | paired with `prependIconType` / `appendIconType: FuIconType` (default `general`) |
+| `prependIconColor` / `appendIconColor` | Any CSS color, applied inline to the icon | omitted ⇒ icon inherits host text color (all shipped SVGs use `currentColor`) |
+
+- Icon sizing is a **floor, not a box**: hosts set `--fu-icon-size` from their own size (`FuButton` sm/md → 20px, lg/xl → 24px; `FuLink` → 20px) and icons apply it as `min-width` / `min-height` only, so the rendered width/height still come from the SVG markup. `FuIcon` falls back to `20px` when no host sets the var.
+- Icon slots are one shared shape, `IIconSlotProps` in [src/runtime/types/icon-slot.ts](../../src/runtime/types/icon-slot.ts), consumed by `FuButton` and `FuLink`. A component passed to `prependIcon` **wins over** `prependIconName`; names are not unique across icon sets, so `*IconType` selects the set and that pairing is not compile-checked. Resolution lives in [src/runtime/utils/icon-slot.ts](../../src/runtime/utils/icon-slot.ts).
 
 - Mutually exclusive prop shapes use **discriminated unions** — reference: `ILinkProps = ILinkPropsInternal | ILinkPropsExternal` discriminated on `external`, in [src/runtime/types/link.ts](../../src/runtime/types/link.ts).
 - Generics for route typing follow Link: `generic="TInternal extends RouteLocationRaw"` so consumers with typed routes get narrowed `destination`.

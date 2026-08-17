@@ -53,6 +53,10 @@ const asyncSvg = computed(() => {
 .fu-icon {
   display: inline-block;
   flex-shrink: 0;
+  /* Floor only — actual width/height still come from the SVG markup. Hosts
+     (FuButton, FuLink) set `--fu-icon-size` to derive it from their own size. */
+  min-width: var(--fu-icon-size, 20px);
+  min-height: var(--fu-icon-size, 20px);
   vertical-align: -0.125em;
   color: inherit;
 }

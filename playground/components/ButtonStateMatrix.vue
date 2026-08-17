@@ -11,16 +11,29 @@
         <article class="type-block">
           <h3>themes</h3>
           <div class="row row--links">
-            <FuLink theme="primary" :destination="'/'">
+            <FuLink
+              theme="primary"
+              :destination="'/'"
+            >
               Primary link
             </FuLink>
-            <FuLink theme="secondary" :destination="'/guard'">
+            <FuLink
+              theme="secondary"
+              :destination="'/guard'"
+            >
               Secondary link
             </FuLink>
-            <FuLink theme="tertiary" :destination="'/expert'">
+            <FuLink
+              theme="tertiary"
+              :destination="'/expert'"
+            >
               Tertiary link
             </FuLink>
-            <FuLink theme="tertiary" selected :destination="'/'">
+            <FuLink
+              theme="tertiary"
+              selected
+              :destination="'/'"
+            >
               Tertiary selected
             </FuLink>
             <FuLink
@@ -50,7 +63,111 @@
         </article>
       </section>
 
-      <section v-for="theme in themes" :key="theme" class="theme-block">
+      <section class="theme-block">
+        <h2>icon slots</h2>
+
+        <article class="type-block">
+          <h3>by name</h3>
+          <div class="row">
+            <FuButton prepend-icon-name="plus"> Default set</FuButton>
+            <FuButton
+              append-icon-name="chevron-down"
+              append-icon-type="arrows"
+            >
+              Named set
+            </FuButton>
+            <FuButton
+              prepend-icon-name="colors"
+              prepend-icon-type="editor"
+              append-icon-name="arrow-right"
+              append-icon-type="arrows"
+            >
+              Both slots
+            </FuButton>
+            <FuButton
+              icon-only
+              prepend-icon-name="settings-01"
+              aria-label="Settings"
+            />
+          </div>
+        </article>
+
+        <article class="type-block">
+          <h3>size-derived floor</h3>
+          <div class="row">
+            <FuButton
+              v-for="size in sizes"
+              :key="`icon-size-${size}`"
+              :size="size"
+              prepend-icon-name="zap"
+              append-icon-name="chevron-down"
+              append-icon-type="arrows"
+            >
+              {{ size }}
+            </FuButton>
+          </div>
+        </article>
+
+        <article class="type-block">
+          <h3>color override</h3>
+          <div class="row">
+            <FuButton
+              theme="secondary"
+              prepend-icon-name="zap"
+              prepend-icon-color="var(--fu-accent, #f59e0b)"
+            >
+              Inline color
+            </FuButton>
+            <FuButton
+              theme="secondary"
+              prepend-icon-name="zap"
+            >
+              Inherited color
+            </FuButton>
+          </div>
+        </article>
+
+        <article class="type-block">
+          <h3>component wins over name</h3>
+          <div class="row">
+            <FuButton
+              :prepend-icon="CustomDotIcon"
+              prepend-icon-name="plus"
+            >
+              Component slot
+            </FuButton>
+            <FuButton prepend-icon-name="plus"> Name slot</FuButton>
+          </div>
+        </article>
+
+        <article class="type-block">
+          <h3>links</h3>
+          <div class="row row--links">
+            <FuLink
+              theme="primary"
+              :destination="'/'"
+              prepend-icon-name="home-01"
+            >
+              Named icon
+            </FuLink>
+            <FuLink
+              theme="secondary"
+              :destination="'/guard'"
+              append-icon-name="arrow-right"
+              append-icon-type="arrows"
+              append-icon-color="var(--fu-accent, #f59e0b)"
+            >
+              Colored icon
+            </FuLink>
+          </div>
+        </article>
+      </section>
+
+      <section
+        v-for="theme in themes"
+        :key="theme"
+        class="theme-block"
+      >
         <h2>{{ theme }}</h2>
 
         <article
@@ -74,9 +191,7 @@
                 :type="buttonType"
                 :size="size"
                 :disabled="state === 'disabled'"
-                :class="
-                  state === 'disabled' ? undefined : `preview-state--${state}`
-                "
+                :class="state === 'disabled' ? undefined : `preview-state--${state}`"
               >
                 Button CTA
               </FuButton>
@@ -89,11 +204,9 @@
 </template>
 
 <script setup lang="ts">
+import { h } from "vue";
 import type { IButtonProps } from "../../src/runtime/components/Button.vue";
-import type {
-  IBadgeProps,
-  TBadgeTheme,
-} from "../../src/runtime/components/Badge.vue";
+import type { IBadgeProps, TBadgeTheme } from "../../src/runtime/components/Badge.vue";
 import type { FuMode } from "../../src/runtime/types";
 
 const props = defineProps<{
@@ -104,21 +217,16 @@ const props = defineProps<{
 const { setMode } = useFuturristic();
 
 const themes: NonNullable<IButtonProps["theme"]>[] = ["primary", "secondary"];
-const types: NonNullable<IButtonProps["type"]>[] = [
-  "main",
-  "subtle",
-  "subtle-border",
-  "subtle-lift",
-];
+const types: NonNullable<IButtonProps["type"]>[] = ["main", "subtle", "subtle-border", "subtle-lift"];
 const sizes: NonNullable<IButtonProps["size"]>[] = ["sm", "md", "lg", "xl"];
 const states = ["default", "hover", "active", "disabled"] as const;
-const badgeThemes: NonNullable<IBadgeProps["theme"]>[] = [
-  "success",
-  "misc",
-  "danger",
-  "warning",
-  "neutral",
-];
+const badgeThemes: NonNullable<IBadgeProps["theme"]>[] = ["success", "misc", "danger", "warning", "neutral"];
+/** Stand-in for "any component a consumer passes" — proves component beats name. */
+const CustomDotIcon = () =>
+  h("svg", { width: 16, height: 16, viewBox: "0 0 16 16", "aria-hidden": "true" }, [
+    h("circle", { cx: 8, cy: 8, r: 5, fill: "currentColor" }),
+  ]);
+
 const badgeLabels: Record<TBadgeTheme, string> = {
   success: "New",
   misc: "Words",
@@ -239,9 +347,6 @@ setMode(props.mode);
   background-color: var(--fu-button-bg-active);
   border-color: var(--fu-button-border-color-active);
   color: var(--fu-button-text-active);
-  box-shadow: var(
-    --fu-button-shadow-active,
-    var(--fu-button-shadow-hover, var(--fu-button-shadow, none))
-  );
+  box-shadow: var(--fu-button-shadow-active, var(--fu-button-shadow-hover, var(--fu-button-shadow, none)));
 }
 </style>

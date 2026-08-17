@@ -3,10 +3,12 @@
   lang="ts"
   generic="TInternal extends RouteLocationRaw = RouteLocationRaw"
 >
-import type { Component } from "vue";
+import { computed } from "vue";
 import type { RouteLocationRaw } from "vue-router";
 import { navigateTo, useRouter } from "#app";
 import type { ILinkProps } from "../types/link";
+import { FU_ICON_DEFAULT_TYPE } from "../types/icon";
+import { resolveIconSlot } from "../utils/icon-slot";
 
 defineOptions({ inheritAttrs: false });
 
@@ -16,10 +18,22 @@ const props = withDefaults(defineProps<ILinkProps<TInternal>>(), {
   external: false,
   disabled: false,
   prependIcon: undefined,
+  prependIconName: undefined,
+  prependIconType: FU_ICON_DEFAULT_TYPE,
   prependIconClass: "",
+  prependIconColor: undefined,
   appendIcon: undefined,
+  appendIconName: undefined,
+  appendIconType: FU_ICON_DEFAULT_TYPE,
   appendIconClass: "",
+  appendIconColor: undefined,
 });
+
+const prependIconSlot = computed(() =>
+  resolveIconSlot(props.prependIcon, props.prependIconName, props.prependIconType),
+);
+
+const appendIconSlot = computed(() => resolveIconSlot(props.appendIcon, props.appendIconName, props.appendIconType));
 
 const router = useRouter();
 
@@ -74,23 +88,28 @@ const onActivate = async () => {
     @click="onActivate"
   >
     <component
-      :is="prependIcon"
-      v-if="prependIcon"
+      :is="prependIconSlot.is"
+      v-if="prependIconSlot"
+      v-bind="prependIconSlot.props"
       :class="['fu-link__icon', prependIconClass]"
+      :style="prependIconColor ? { color: prependIconColor } : undefined"
     />
     <span class="fu-link__label">
       <slot />
     </span>
     <component
-      :is="appendIcon"
-      v-if="appendIcon"
+      :is="appendIconSlot.is"
+      v-if="appendIconSlot"
+      v-bind="appendIconSlot.props"
       :class="['fu-link__icon', appendIconClass]"
+      :style="appendIconColor ? { color: appendIconColor } : undefined"
     />
   </button>
 </template>
 
 <style scoped>
 .fu-link {
+  --fu-icon-size: 20px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -117,8 +136,9 @@ const onActivate = async () => {
 
 .fu-link__icon {
   flex-shrink: 0;
-  width: 20px;
-  height: 20px;
+  /* Floor only — the SVG markup still decides the rendered width/height. */
+  min-width: var(--fu-icon-size);
+  min-height: var(--fu-icon-size);
   color: inherit;
 }
 

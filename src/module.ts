@@ -21,11 +21,13 @@ export type {
 } from "./runtime/types/link";
 export { FU_ICON_DEFAULT_TYPE } from "./runtime/types/icon";
 export type {
+  FuAnyIconName,
   FuIconName,
   FuIconRegistry,
   FuIconType,
   IIconProps,
 } from "./runtime/types/icon";
+export type { IIconSlotProps } from "./runtime/types/icon-slot";
 // TODO: Make buttons and other component more a11y-friendly
 export interface ModuleOptions {
   /** Active color/style mode. Default: 'defend' */
