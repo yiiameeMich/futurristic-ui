@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, defineAsyncComponent } from "vue";
-import { FU_ICON_DEFAULT_TYPE, type IIconProps } from "../types/icon";
+import {computed, defineAsyncComponent} from "vue";
+import {FU_ICON_DEFAULT_TYPE, type IIconProps} from "../types/icon";
 
-defineOptions({ inheritAttrs: false });
+defineOptions({inheritAttrs: false});
 
 const props = withDefaults(defineProps<IIconProps>(), {
   iconName: undefined,
