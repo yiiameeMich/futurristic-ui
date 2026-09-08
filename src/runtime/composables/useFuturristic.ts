@@ -1,6 +1,6 @@
-import { useState, useRuntimeConfig } from "#app";
+import { useRuntimeConfig, useState } from "#app";
 import { readonly } from "vue";
-import type { FuMode, FuConfig } from "../types";
+import type { FuConfig, FuMode } from "../types";
 
 export { type FuMode, type FuConfig };
 

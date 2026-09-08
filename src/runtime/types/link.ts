@@ -12,12 +12,11 @@ type LinkChrome = IIconSlotProps & {
 };
 
 /** Internal: `destination` uses `T` (default `RouteLocationRaw`; use module augmentation / typed routes in the app to narrow). */
-export type ILinkPropsInternal<T extends RouteLocationRaw = RouteLocationRaw> =
-  LinkChrome & {
-    external?: false;
-    destination: T;
-    disabled?: boolean;
-  };
+export type ILinkPropsInternal<T extends RouteLocationRaw = RouteLocationRaw> = LinkChrome & {
+  external?: false;
+  destination: T;
+  disabled?: boolean;
+};
 
 /** External: `destination` is always a string URL. */
 export type ILinkPropsExternal = LinkChrome & {
@@ -26,6 +25,4 @@ export type ILinkPropsExternal = LinkChrome & {
   disabled?: boolean;
 };
 
-export type ILinkProps<T extends RouteLocationRaw = RouteLocationRaw> =
-  | ILinkPropsInternal<T>
-  | ILinkPropsExternal;
+export type ILinkProps<T extends RouteLocationRaw = RouteLocationRaw> = ILinkPropsInternal<T> | ILinkPropsExternal;
